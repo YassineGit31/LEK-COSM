@@ -1,0 +1,28 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+
+html{scroll-behavior:smooth;color-scheme:light}
+body{@apply bg-cream text-sage font-sans antialiased}
+:focus-visible{outline:2px solid #C9A96B;outline-offset:3px}
+
+/* Titres : Playfair Display. Tout le reste : Montserrat. */
+.h{@apply font-serif font-medium tracking-tight}
+
+/* Boutons (pilule) — .btn = contour, .btn-solid = plein */
+.btn{@apply inline-flex items-center justify-center gap-2 rounded-full border border-sage px-7 py-3.5 text-[13px] font-medium uppercase tracking-[.14em] text-sage transition-colors hover:bg-sage hover:text-cream disabled:pointer-events-none disabled:opacity-40}
+.btn-solid{@apply bg-sage text-cream hover:bg-sage/90}
+.btn-sm{@apply px-5 py-2.5 text-xs}
+
+/* Champs de formulaire */
+.input{@apply w-full rounded-xl border border-taupe/35 bg-white px-4 py-3 text-sm text-sage outline-none transition placeholder:text-taupe focus:border-sage focus:ring-2 focus:ring-sage/15}
+
+/* Surface blanche (cartes, panneaux) */
+.glass{@apply border border-sage/10 bg-white}
+
+/* Menu mobile */
+.mobile-menu-in{animation:menuIn .25s ease-out}
+@keyframes menuIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+
+@media (prefers-reduced-motion: reduce){
+  .mobile-menu-in{animation:none}
+  *{scroll-behavior:auto !important;transition-duration:.01ms !important}
+}
