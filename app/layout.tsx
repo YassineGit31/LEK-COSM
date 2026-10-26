@@ -15,5 +15,5 @@ export const metadata: Metadata = {
   description: 'Boutique de cosmétiques à Oran, Algérie. Livraison disponible et paiement à la livraison.',
 }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (<html lang="fr"><body className={`${serif.variable} ${sans.variable}`}><StoreSettingsProvider><WilayaProvider><CartProvider><FavoritesProvider><Navbar /><main className="min-h-screen pb-20 md:pb-0">{children}</main><Footer /></FavoritesProvider></CartProvider></WilayaProvider></StoreSettingsProvider></body></html>)
+  return (<html lang="fr" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: "try{if(localStorage.getItem('wp_theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}" }} /></head><body className={`${serif.variable} ${sans.variable}`}><StoreSettingsProvider><WilayaProvider><CartProvider><FavoritesProvider><Navbar /><main className="min-h-screen pb-20 md:pb-0">{children}</main><Footer /></FavoritesProvider></CartProvider></WilayaProvider></StoreSettingsProvider></body></html>)
 }

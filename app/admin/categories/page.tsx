@@ -30,7 +30,7 @@ export default function Categories() {
     </form>
     {!rows.length ? <EmptyState text="Aucune catégorie." /> : (
       <div className="bg-coal border border-ivory/10 divide-y divide-ivory/10">{rows.map(c => (
-        <div key={c.id} className="flex items-center justify-between p-4 text-sm"><span>{c.name}<span className="text-ivory/40 ml-2 text-xs">/{c.slug} · {c.gender}</span></span>
+        <div key={c.id} className="flex items-center justify-between p-4 text-sm"><span>{c.name}<span className="text-warm ml-2 text-xs">/{c.slug} · {c.gender}</span></span>
           <button onClick={() => del(c.id)} className="text-red-700 text-xs underline">Supprimer</button></div>
       ))}</div>
     )}

@@ -7,6 +7,7 @@ import { useFavorites } from '@/lib/favorites'
 import { CATEGORIES } from '@/lib/categories'
 import WilayaSelector from './WilayaSelector'
 import Icon from './Icons'
+import ThemeToggle from './ThemeToggle'
 
 const links: [string, string][] = [['/shop', 'Boutique'], ['/shop/soins-visage', 'Soins visage'], ['/shop/maquillage', 'Maquillage'], ['/shop/parfums', 'Parfums'], ['/about', 'À propos'], ['/contact', 'Contact']]
 
@@ -22,13 +23,14 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 md:h-20">
         <div className="flex items-center gap-3">
           <button aria-label="Ouvrir le menu" onClick={() => setMenu(true)} className="-ml-2 flex h-10 w-10 items-center justify-center md:hidden"><Icon name="menu" className="h-6 w-6" /></button>
-          <Link href="/" aria-label="COSMÉTIQUE LE K — accueil"><img src="/brand/lk-logo-horizontal.png" alt="COSMÉTIQUE LE K" className="h-9 w-auto md:h-11" /></Link>
+          <Link href="/" aria-label="COSMÉTIQUE LE K — accueil"><img src="/brand/lk-logo-horizontal.png" alt="COSMÉTIQUE LE K" className="h-10 w-auto md:h-12" /></Link>
         </div>
         <nav aria-label="Navigation principale" className="hidden items-center gap-7 text-[13px] font-medium md:flex">
           {links.map(([h, l]) => <Link key={h} href={h} className={`border-b py-1 transition-colors hover:border-gold ${active(h) ? 'border-gold' : 'border-transparent'}`}>{l}</Link>)}
         </nav>
         <div className="flex items-center gap-5">
           <span className="hidden lg:block"><WilayaSelector compact /></span>
+          <ThemeToggle className="-mx-2" />
           <Link href="/favoris" aria-label={`Favoris (${ids.length})`} className="relative hidden sm:block"><Icon name="heart" className="h-6 w-6" /><Badge n={ids.length} /></Link>
           <Link href="/cart" aria-label={`Panier (${count})`} className="relative"><Icon name="bag" className="h-6 w-6" /><Badge n={count} /></Link>
         </div>

@@ -28,9 +28,9 @@ export default function Customers() {
   return (<div className="space-y-5">
     <h1 className="h text-3xl">Clients</h1>
     <input className="input max-w-sm" placeholder="Rechercher nom, téléphone, wilaya…" value={q} onChange={e => setQ(e.target.value)} />
-    {loading ? <p className="text-sm text-ivory/50">Chargement…</p> : !rows.length ? <EmptyState text="Aucun client." /> : (
+    {loading ? <p className="text-sm text-warm">Chargement…</p> : !rows.length ? <EmptyState text="Aucun client." /> : (
       <div className="overflow-x-auto bg-coal border border-ivory/10"><table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr>{['Client', 'Téléphone', 'Wilaya', 'Commandes', 'Total dépensé', 'Dernière commande', ''].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr>{['Client', 'Téléphone', 'Wilaya', 'Commandes', 'Total dépensé', 'Dernière commande', ''].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
         <tbody>{rows.map(c => (<tr key={c.id} className="border-t border-ivory/10 hover:bg-ivory/5">
           <td className="p-3">{c.name}</td><td className="p-3"><a className="text-sage" href={`tel:${c.phone}`}>{c.phone}</a></td><td className="p-3">{c.wilaya}</td>
           <td className="p-3">{c.orderCount}</td><td className="p-3">{da(c.total)}</td><td className="p-3">{c.last ? new Date(c.last).toLocaleDateString('fr-FR') : '—'}</td>

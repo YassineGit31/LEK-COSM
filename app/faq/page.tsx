@@ -15,6 +15,6 @@ export default function FAQ() {
     <div className="mt-10 divide-y divide-sage/10 border-y border-sage/10">
       {faqs.map(([q, a]) => (<details key={q} className="group py-5">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">{q}<Icon name="chevron" className="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" /></summary>
-        <p className="mt-3 max-w-prose text-sm leading-relaxed text-sage/85">{a}</p></details>))}
+        <p className="mt-3 max-w-prose text-sm leading-relaxed text-warm">{a}</p></details>))}
     </div></div>)
 }

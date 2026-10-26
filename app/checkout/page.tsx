@@ -80,7 +80,7 @@ export default function Checkout() {
     clear(); router.push('/order-success')
   }
   if (!items.length) return <div className="mx-auto max-w-md px-5 py-28 text-center"><h1 className="h text-4xl">Votre panier est vide</h1><Link href="/shop" className="btn btn-solid mt-8">Découvrir la boutique</Link></div>
-  const sec = 'rounded-3xl bg-white p-6 md:p-8'; const lab = 'mb-1.5 block text-sm font-medium'
+  const sec = 'rounded-3xl bg-coal p-6 md:p-8'; const lab = 'mb-1.5 block text-sm font-medium'
   return (<form onSubmit={submit} className="mx-auto grid max-w-6xl gap-10 px-5 py-10 md:py-14 lg:grid-cols-5">
     <div className="space-y-6 lg:col-span-3"><h1 className="h text-4xl md:text-5xl">Commande</h1>
       <section className={sec}><h2 className="h mb-5 text-2xl">Vos coordonnées</h2><div className="space-y-4">
@@ -93,23 +93,23 @@ export default function Checkout() {
           <option value="">Choisir une wilaya</option>{wilayas.map(w => <option key={w.id} value={w.name}>{w.code} - {w.name}</option>)}</select></label>
         {f.wilaya && !feeLoading && !officeOk && !homeOk && <p role="alert" className="mt-3 text-sm text-red-700">La livraison n&rsquo;est pas disponible pour cette wilaya. Le retrait sur place reste possible s&rsquo;il est proposé.</p>}</section>
 
-      <section className={sec}><h2 className="h mb-1 text-2xl">Mode de réception</h2><p className="mb-5 text-sm text-sage/75">Choisissez comment vous souhaitez recevoir votre commande.</p>
+      <section className={sec}><h2 className="h mb-1 text-2xl">Mode de réception</h2><p className="mb-5 text-sm text-warm">Choisissez comment vous souhaitez recevoir votre commande.</p>
         <div role="radiogroup" aria-label="Mode de réception" className="space-y-3">
           {METHODS.map(m => { const ok = methodOk(m); const on = method === m
-            return (<label key={m} className={`flex items-start gap-3 rounded-2xl border p-4 text-sm transition ${!ok ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${on ? 'border-sage bg-cream ring-1 ring-sage' : 'border-sage/20 bg-white hover:border-sage/60'}`}>
+            return (<label key={m} className={`flex items-start gap-3 rounded-2xl border p-4 text-sm transition ${!ok ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${on ? 'border-sage bg-cream ring-1 ring-sage' : 'border-sage/20 bg-coal hover:border-sage/60'}`}>
               <input type="radio" name="delivery_method" className="mt-1 h-4 w-4 shrink-0 accent-sage" disabled={!ok} checked={on} onChange={() => setMethod(m)} />
               <span className="min-w-0 flex-1"><span className="flex flex-wrap items-baseline justify-between gap-x-3"><b className="font-medium">{METHOD_LABEL[m].fr}</b><span className={`shrink-0 ${ok ? 'font-medium' : 'text-red-700'}`}>{m === 'pickup' && !pickupReady ? 'Indisponible' : feeOf(m)}</span></span>
-                <span dir="rtl" lang="ar" className="mt-0.5 block text-sage/75">{METHOD_LABEL[m].ar}</span></span></label>) })}
+                <span dir="rtl" lang="ar" className="mt-0.5 block text-warm">{METHOD_LABEL[m].ar}</span></span></label>) })}
         </div>
-        {!pickupReady && <p className="mt-3 text-xs text-sage/75">Le retrait sur place n&rsquo;est pas proposé pour le moment.</p>}</section>
+        {!pickupReady && <p className="mt-3 text-xs text-warm">Le retrait sur place n&rsquo;est pas proposé pour le moment.</p>}</section>
 
       {method && <section className={sec}><h2 className="h mb-5 text-2xl">{method === 'pickup' ? 'Retrait sur place' : method === 'office' ? 'Livraison au bureau' : 'Adresse de livraison'}</h2>
         {method === 'pickup' ? (<div className="space-y-3 text-sm">
           <div className="rounded-2xl border border-sage/20 bg-cream p-4">
             {pickup.name && <p className="font-medium">{pickup.name}</p>}<p className="whitespace-pre-line">{pickup.address}</p>
-            {pickup.hours && <p className="mt-2 text-sage/75">Horaires : {pickup.hours}</p>}
-            {pickup.instructions && <p className="mt-2 whitespace-pre-line text-sage/75">{pickup.instructions}</p>}</div>
-          <p className="text-sage/75">Aucun frais de livraison. Vous récupérez votre commande vous-même à cette adresse.</p>
+            {pickup.hours && <p className="mt-2 text-warm">Horaires : {pickup.hours}</p>}
+            {pickup.instructions && <p className="mt-2 whitespace-pre-line text-warm">{pickup.instructions}</p>}</div>
+          <p className="text-warm">Aucun frais de livraison. Vous récupérez votre commande vous-même à cette adresse.</p>
           <label className="block"><span className={lab}>Remarques (optionnel)</span><textarea className="input" rows={3} value={f.notes} onChange={set('notes')} /></label></div>) : (<div className="space-y-4">
           {method === 'office' && <p className="rounded-2xl bg-sand/40 p-4 text-sm">Votre colis sera livré au <b className="font-medium">bureau de la société de livraison</b> de votre wilaya. Vous devrez vous y rendre pour le récupérer ; la société vous contactera à son arrivée.</p>}
           <label className="block"><span className={lab}>Commune</span><input required className="input" value={f.commune} onChange={set('commune')} /></label>
@@ -118,16 +118,16 @@ export default function Checkout() {
       </section>}
 
       <section className={sec}><h2 className="h mb-5 text-2xl">Paiement</h2>
-        <div className="flex items-start gap-3 rounded-2xl border border-sage bg-cream p-4 text-sm"><span aria-hidden className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-sage"><span className="h-2 w-2 rounded-full bg-sage" /></span><span><b className="font-medium">{method === 'pickup' ? 'Paiement au retrait' : 'Paiement à la livraison'}</b><br /><span className="text-sage/75">{method === 'pickup' ? 'Vous réglez votre commande sur place, au moment du retrait.' : 'Vous réglez en espèces à la réception de votre commande.'}</span></span></div>
+        <div className="flex items-start gap-3 rounded-2xl border border-sage bg-cream p-4 text-sm"><span aria-hidden className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-sage"><span className="h-2 w-2 rounded-full bg-sage" /></span><span><b className="font-medium">{method === 'pickup' ? 'Paiement au retrait' : 'Paiement à la livraison'}</b><br /><span className="text-warm">{method === 'pickup' ? 'Vous réglez votre commande sur place, au moment du retrait.' : 'Vous réglez en espèces à la réception de votre commande.'}</span></span></div>
         <label className="mt-5 block"><span className={lab}>Code promo (optionnel)</span><input className="input uppercase" value={f.coupon} onChange={set('coupon')} /></label></section>
     </div>
-    <aside className="h-fit space-y-3 rounded-3xl bg-white p-6 text-sm lg:sticky lg:top-28 lg:col-span-2"><h2 className="h text-2xl">Résumé</h2>
-      {items.map(i => <p key={i.productId + i.format} className="flex justify-between gap-3"><span>{i.name}<br /><span className="text-sage/75">{fmtLabel(i.format, i.size)} × {i.qty}</span></span><span className="shrink-0">{da(i.price * i.qty)}</span></p>)}
+    <aside className="h-fit space-y-3 rounded-3xl bg-coal p-6 text-sm lg:sticky lg:top-28 lg:col-span-2"><h2 className="h text-2xl">Résumé</h2>
+      {items.map(i => <p key={i.productId + i.format} className="flex justify-between gap-3"><span>{i.name}<br /><span className="text-warm">{fmtLabel(i.format, i.size)} × {i.qty}</span></span><span className="shrink-0">{da(i.price * i.qty)}</span></p>)}
       <p className="flex justify-between border-t border-sage/10 pt-3"><span>Sous-total</span><span>{da(subtotal)}</span></p>
       {discount > 0 && <p className="flex justify-between text-sage"><span>Remise ({f.coupon.trim().toUpperCase()})</span><span>−{da(discount)}</span></p>}
       <p className="flex justify-between"><span>{method === 'pickup' ? 'Retrait sur place' : 'Livraison'}</span><span>{!method ? '—' : method === 'pickup' ? 'Gratuit' : !f.wilaya ? '—' : delivery ? da(delivery) : 'Offerte'}</span></p>
-      {method && <p className="text-xs text-sage/75">{METHOD_LABEL[method].fr}</p>}
+      {method && <p className="text-xs text-warm">{METHOD_LABEL[method].fr}</p>}
       <p className="flex items-baseline justify-between border-t border-sage/10 pt-3"><span className="h text-xl">Total</span><span className="h text-2xl">{da(total)}</span></p>
-      <p className="text-xs text-sage/75">Le montant définitif (remise et livraison) est confirmé par le serveur à la validation.</p>
+      <p className="text-xs text-warm">Le montant définitif (remise et livraison) est confirmé par le serveur à la validation.</p>
       {err && <p role="alert" className="text-red-700">{err}</p>}<button disabled={busy} className="btn btn-solid w-full">{busy ? 'Envoi…' : 'Confirmer ma commande'}</button></aside></form>)
 }

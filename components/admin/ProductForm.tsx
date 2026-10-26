@@ -72,7 +72,7 @@ export default function ProductForm({ product }: { product?: any }) {
     </section>
 
     <section className="bg-coal border border-ivory/10 p-5 space-y-3">
-      <h2 className="h text-lg mb-2">Notes olfactives <span className="text-xs font-normal text-ivory/60">(parfums uniquement, laisser vide sinon)</span></h2>
+      <h2 className="h text-lg mb-2">Notes olfactives <span className="text-xs font-normal text-warm">(parfums uniquement, laisser vide sinon)</span></h2>
       <div className="grid md:grid-cols-3 gap-3">
         <input className="input" placeholder="Notes de tête (séparées par virgule)" value={f.top_notes} onChange={set('top_notes')} />
         <input className="input" placeholder="Notes de cœur" value={f.heart_notes} onChange={set('heart_notes')} />
@@ -87,29 +87,29 @@ export default function ProductForm({ product }: { product?: any }) {
         <input className="input" placeholder="Contenance (ex: 100ML, 50ML ou 1 pièce)" value={f.full_size} onChange={set('full_size')} />
         <input required type="number" min={0} className="input" placeholder="Prix (DA)" value={f.full_price} onChange={set('full_price')} />
         <input type="number" min={0} className="input" placeholder="Ancien prix (DA, optionnel)" value={f.full_old_price} onChange={set('full_old_price')} />
-        <p className="text-xs text-ivory/50">Stock (calculé) : <span className="text-ivory">{computedFullStock} flacon(s)</span></p>
+        <p className="text-xs text-warm">Stock (calculé) : <span className="text-ivory">{computedFullStock} flacon(s)</span></p>
       </div>
       <div className="bg-coal border border-ivory/10 p-5 space-y-3">
         <div className="flex items-center justify-between"><h2 className="h text-lg">10ML</h2>
           <label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={f.sample_10ml} onChange={set('sample_10ml')} /> Disponible</label></div>
         <input type="number" min={0} className="input" placeholder="Prix (DA)" value={f.price_10ml} onChange={set('price_10ml')} />
         <input type="number" min={0} className="input" placeholder="Ancien prix (DA, optionnel)" value={f.old_price_10ml} onChange={set('old_price_10ml')} />
-        <p className="text-xs text-ivory/50">Stock (calculé) : <span className="text-ivory">{computed10mlStock} portion(s)</span></p>
+        <p className="text-xs text-warm">Stock (calculé) : <span className="text-ivory">{computed10mlStock} portion(s)</span></p>
       </div>
     </section>
 
     <section className="bg-coal border border-ivory/10 p-5 space-y-3">
       <h2 className="h text-lg mb-2">Stock</h2>
-      <p className="text-xs text-ivory/60">Produit autre qu'un parfum : mettez « 1 pièce » comme contenance, décochez 10ML, et saisissez le stock en nombre de pièces (ex : 12).</p>
-      <p className="text-xs text-ivory/50">Un seul stock physique (en ml) pour ce parfum : le flacon plein et les portions 10ML sont le même liquide, donc une vente de l'un fait automatiquement bouger l'autre.</p>
+      <p className="text-xs text-warm">Produit autre qu'un parfum : mettez « 1 pièce » comme contenance, décochez 10ML, et saisissez le stock en nombre de pièces (ex : 12).</p>
+      <p className="text-xs text-warm">Un seul stock physique (en ml) pour ce parfum : le flacon plein et les portions 10ML sont le même liquide, donc une vente de l'un fait automatiquement bouger l'autre.</p>
       <input required type="number" min={0} className="input" placeholder="Stock total (en ml)" value={f.stock_ml} onChange={set('stock_ml')} />
-      <p className="text-xs text-ivory/50">≈ {computedFullStock} flacon(s) de {fullSizeMl}ML, ou {computed10mlStock} portion(s) de 10ML.</p>
+      <p className="text-xs text-warm">≈ {computedFullStock} flacon(s) de {fullSizeMl}ML, ou {computed10mlStock} portion(s) de 10ML.</p>
     </section>
 
     <section className="bg-coal border border-ivory/10 p-5 space-y-2">
       <h2 className="h text-lg">Disponibilité</h2>
       <select className="input bg-ink max-w-xs" value={f.is_available ? '1' : '0'} onChange={e => setF({ ...f, is_available: e.target.value === '1' })}><option value="1">Disponible</option><option value="0">Indisponible</option></select>
-      <p className="text-xs text-ivory/60">Utilisée quand la <b>gestion du stock est désactivée</b> (Admin &gt; Stock) : « Disponible » = commandable même avec un stock à 0 ; « Indisponible » = impossible à commander. Quand la gestion du stock est activée, c'est la quantité en stock qui décide.</p>
+      <p className="text-xs text-warm">Utilisée quand la <b>gestion du stock est désactivée</b> (Admin &gt; Stock) : « Disponible » = commandable même avec un stock à 0 ; « Indisponible » = impossible à commander. Quand la gestion du stock est activée, c'est la quantité en stock qui décide.</p>
     </section>
 
     <section className="bg-coal border border-ivory/10 p-5 flex flex-wrap gap-5 text-sm">

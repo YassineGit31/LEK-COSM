@@ -35,13 +35,13 @@ export default function OrderDetail() {
   async function saveNotes() { setBusy(true); await sb().from('orders').update({ notes }).eq('id', id); setBusy(false); load() }
   async function del() { if (confirm('Supprimer définitivement cette commande ? Le stock encore réservé par cette commande sera restitué automatiquement.')) { const { error } = await sb().from('orders').delete().eq('id', id); if (error) return alert(`Erreur : ${error.message}`); router.push('/admin/orders') } }
 
-  if (!o) return <p className="text-sm text-ivory/50">Chargement…</p>
+  if (!o) return <p className="text-sm text-warm">Chargement…</p>
 
   return (<div className="space-y-5 max-w-5xl">
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div><Link href="/admin/orders" className="text-xs text-ivory/50 underline">← Toutes les commandes</Link>
+      <div><Link href="/admin/orders" className="text-xs text-warm underline">← Toutes les commandes</Link>
         <h1 className="h text-3xl mt-1">Commande #{o.order_number}</h1>
-        <p className="text-xs text-ivory/50 mt-1">{new Date(o.created_at).toLocaleString('fr-FR')}</p></div>
+        <p className="text-xs text-warm mt-1">{new Date(o.created_at).toLocaleString('fr-FR')}</p></div>
       <StatusBadge status={o.status} />
     </div>
 
@@ -56,20 +56,20 @@ export default function OrderDetail() {
       <Card title="Client">
         <p>{o.customers?.name}</p>
         <p><a className="text-sage" href={`tel:${o.customers?.phone}`}>{o.customers?.phone}</a></p>
-        {o.customers?.email && <p className="text-ivory/70">{o.customers.email}</p>}
+        {o.customers?.email && <p className="text-warm">{o.customers.email}</p>}
       </Card>
       <Card title="Livraison">
         <p className="mb-2"><MethodBadge method={o.delivery_method} full /></p>
         <p>{o.wilaya}{o.delivery_method !== 'pickup' && o.commune ? `, ${o.commune}` : ''}</p>
-        {o.delivery_method === 'home' && <p className="text-ivory/70">{o.address}</p>}
-        {o.delivery_method === 'office' && <p className="text-ivory/70">Retrait au bureau de la société de livraison{o.address && !o.address.startsWith('Retrait au bureau') ? ` — ${o.address}` : ''}</p>}
-        {o.delivery_method === 'pickup' && <p className="text-ivory/70 whitespace-pre-line">{o.pickup_info || 'Retrait sur place — sans livraison'}</p>}
+        {o.delivery_method === 'home' && <p className="text-warm">{o.address}</p>}
+        {o.delivery_method === 'office' && <p className="text-warm">Retrait au bureau de la société de livraison{o.address && !o.address.startsWith('Retrait au bureau') ? ` — ${o.address}` : ''}</p>}
+        {o.delivery_method === 'pickup' && <p className="text-warm whitespace-pre-line">{o.pickup_info || 'Retrait sur place — sans livraison'}</p>}
       </Card>
     </div>
 
     <Card title="Produits">
       <table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr><th className="py-2">Produit</th><th>Format</th><th>Qté</th><th>PU</th><th className="text-right">Sous-total</th></tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr><th className="py-2">Produit</th><th>Format</th><th>Qté</th><th>PU</th><th className="text-right">Sous-total</th></tr></thead>
         <tbody>{o.order_items.map((i: any) => (<tr key={i.id} className="border-t border-ivory/10"><td className="py-2">{i.product_name}</td><td>{fmtLabel(i.format, i.size)}</td><td>{i.quantity}</td><td>{da(i.unit_price)}</td><td className="text-right">{da(i.subtotal)}</td></tr>))}</tbody>
       </table>
       <div className="mt-4 ml-auto max-w-xs space-y-1 text-sm">
@@ -87,7 +87,7 @@ export default function OrderDetail() {
 
     <Card title="Historique du statut">
       <ol className="space-y-3">{history.map((h, i) => (<li key={h.id} className="flex items-center gap-3 text-sm">
-        <span className="h-2.5 w-2.5 rounded-full bg-gold" /><span>{STATUS[h.status]}</span><span className="text-ivory/40 text-xs">{new Date(h.created_at).toLocaleString('fr-FR')}</span>
+        <span className="h-2.5 w-2.5 rounded-full bg-gold" /><span>{STATUS[h.status]}</span><span className="text-warm text-xs">{new Date(h.created_at).toLocaleString('fr-FR')}</span>
       </li>))}</ol>
     </Card>
   </div>)

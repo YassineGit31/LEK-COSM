@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 
+// Les couleurs sont des variables CSS (voir app/globals.css) : clair par défaut, sombre avec la classe `dark` sur <html>.
 // Thème BORDEAUX · BLANC · OR CHAMPAGNE — COSMÉTIQUE LE K (aucun noir).
 //   sage  = Deep Burgundy  #722F37  boutons principaux, titres, identité
 //   wine  = Dark Wine      #451D26  survols (hover) et accents forts
@@ -13,17 +14,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        sage: '#722F37',
-        wine: '#451D26',
-        gold: '#C9A96B',
-        cream: '#FFFFFF',
-        sand: '#F8F5F0',
-        warm: '#625A58',
-        mist: '#EFE6D2',    // champagne très clair (pastilles, bandeaux)
-        taupe: '#7C7370',   // placeholders, icônes discrètes
-        ink: '#F8F5F0',     // admin : fond de page
-        coal: '#FFFFFF',    // admin : cartes et panneaux
-        ivory: '#722F37',   // admin : texte et bordures
+        sage: 'rgb(var(--c-sage) / <alpha-value>)',
+        wine: 'rgb(var(--c-wine) / <alpha-value>)',
+        gold: 'rgb(var(--c-gold) / <alpha-value>)',
+        cream: 'rgb(var(--c-cream) / <alpha-value>)',
+        sand: 'rgb(var(--c-sand) / <alpha-value>)',
+        warm: 'rgb(var(--c-warm) / <alpha-value>)',
+        mist: 'rgb(var(--c-mist) / <alpha-value>)',
+        taupe: 'rgb(var(--c-taupe) / <alpha-value>)',
+        ink: 'rgb(var(--c-ink) / <alpha-value>)',
+        coal: 'rgb(var(--c-coal) / <alpha-value>)',
+        ivory: 'rgb(var(--c-ivory) / <alpha-value>)',
       },
       // Ombres teintées bordeaux (jamais de noir)
       boxShadow: {

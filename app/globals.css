@@ -1,5 +1,29 @@
 @tailwind base;@tailwind components;@tailwind utilities;
 
+/* Palette (triplets RGB). Clair = défaut ; sombre = classe .dark sur <html> (bouton lune/soleil dans l'en-tête). */
+:root{
+  --c-sage:114 47 55;     /* Deep Burgundy  #722F37 */
+  --c-wine:69 29 38;      /* Dark Wine      #451D26 */
+  --c-gold:201 169 107;   /* Champagne Gold #C9A96B */
+  --c-cream:255 255 255;  /* Pure White     #FFFFFF */
+  --c-sand:248 245 240;   /* Warm Ivory     #F8F5F0 */
+  --c-warm:98 90 88;      /* Warm Gray      #625A58 */
+  --c-mist:239 230 210; --c-taupe:124 115 112;
+  --c-ink:248 245 240; --c-coal:255 255 255; --c-ivory:114 47 55;
+}
+.dark{
+  --c-sage:233 214 196;   /* texte, titres, boutons : ivoire champagne */
+  --c-wine:255 248 240;   /* survol des boutons */
+  --c-gold:212 182 122;
+  --c-cream:24 15 17;     /* fond de page : vin très sombre */
+  --c-sand:36 22 25;
+  --c-warm:201 189 184;
+  --c-mist:58 36 41; --c-taupe:168 156 151;
+  --c-ink:30 18 21; --c-coal:40 25 29; --c-ivory:233 214 196;
+}
+html.dark{color-scheme:dark}
+.dark .text-red-700{color:#f28b82} .dark .text-amber-700{color:#f0c36d} .dark .text-emerald-700{color:#7fd3a1}
+
 html{scroll-behavior:smooth;color-scheme:light}
 body{@apply bg-cream text-sage font-sans antialiased}
 :focus-visible{outline:2px solid #C9A96B;outline-offset:3px}
@@ -8,15 +32,15 @@ body{@apply bg-cream text-sage font-sans antialiased}
 .h{@apply font-serif font-medium tracking-tight}
 
 /* Boutons (pilule) — .btn = contour, .btn-solid = plein */
-.btn{@apply inline-flex items-center justify-center gap-2 rounded-full border border-sage px-7 py-3.5 text-[13px] font-medium uppercase tracking-[.14em] text-sage transition-colors hover:bg-sage hover:text-cream disabled:pointer-events-none disabled:opacity-40}
-.btn-solid{@apply bg-sage text-cream hover:bg-sage/90}
+.btn{@apply inline-flex items-center justify-center gap-2 rounded-full border border-sage px-7 py-3.5 text-[13px] font-medium uppercase tracking-[.14em] text-sage transition-colors hover:bg-wine hover:border-wine hover:text-cream disabled:pointer-events-none disabled:opacity-40}
+.btn-solid{@apply bg-sage text-cream hover:bg-wine hover:border-wine}
 .btn-sm{@apply px-5 py-2.5 text-xs}
 
 /* Champs de formulaire */
-.input{@apply w-full rounded-xl border border-taupe/35 bg-white px-4 py-3 text-sm text-sage outline-none transition placeholder:text-taupe focus:border-sage focus:ring-2 focus:ring-sage/15}
+.input{@apply w-full rounded-xl border border-taupe/35 bg-coal px-4 py-3 text-sm text-sage outline-none transition placeholder:text-taupe focus:border-sage focus:ring-2 focus:ring-sage/15}
 
 /* Surface blanche (cartes, panneaux) */
-.glass{@apply border border-sage/10 bg-white}
+.glass{@apply border border-sage/10 bg-coal}
 
 /* Menu mobile */
 .mobile-menu-in{animation:menuIn .25s ease-out}

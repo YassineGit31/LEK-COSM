@@ -4,9 +4,9 @@ import { methodFr } from '@/lib/delivery'
 
 export function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (<div className="bg-coal border border-ivory/10 p-4">
-    <p className="text-[11px] uppercase tracking-widest text-ivory/50">{label}</p>
+    <p className="text-[11px] uppercase tracking-widest text-warm">{label}</p>
     <p className="h text-2xl mt-1">{value}</p>
-    {sub && <p className="text-xs text-ivory/40 mt-1">{sub}</p>}
+    {sub && <p className="text-xs text-warm mt-1">{sub}</p>}
   </div>)
 }
 
@@ -22,7 +22,7 @@ export function Card({ title, action, children }: { title?: string; action?: Rea
 }
 
 export function EmptyState({ text }: { text: string }) {
-  return <p className="text-center text-ivory/50 py-12 text-sm">{text}</p>
+  return <p className="text-center text-warm py-12 text-sm">{text}</p>
 }
 
 const METHOD_STYLE: Record<string, string> = { office: 'bg-taupe text-white', home: 'bg-sage text-white', pickup: 'bg-gold text-sage' }

@@ -29,7 +29,7 @@ export default async function Home() {
     <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-10 md:grid-cols-2 md:pb-24 md:pt-16">
       <div>
         <h1 className="h text-[2.6rem] leading-[1.08] md:text-6xl">Votre beauté, notre priorité.</h1>
-        <p className="mt-6 max-w-md text-base leading-relaxed text-sage/85">Découvrez une sélection de produits cosmétiques originaux et importés pour une beauté sans compromis.</p>
+        <p className="mt-6 max-w-md text-base leading-relaxed text-warm">Découvrez une sélection de produits cosmétiques originaux et importés pour une beauté sans compromis.</p>
         <div className="mt-9 flex flex-wrap gap-3">
           <Link href="/shop" className="btn btn-solid">Découvrir la boutique</Link>
           <Link href="#meilleures-ventes" className="btn">Nos meilleures ventes</Link>
@@ -46,9 +46,9 @@ export default async function Home() {
 
     {/* Réassurance */}
     <section aria-label="Nos engagements" className="mx-auto max-w-7xl px-5">
-      <div className="grid grid-cols-2 gap-y-6 rounded-3xl border border-sage/10 bg-white px-4 py-7 md:grid-cols-4 md:px-8">
+      <div className="grid grid-cols-2 gap-y-6 rounded-3xl border border-sage/10 bg-coal px-4 py-7 md:grid-cols-4 md:px-8">
         {TRUST.map(([i, t, d]) => (<div key={t} className="flex flex-col items-center px-2 text-center md:flex-row md:gap-4 md:text-left">
-          <Icon name={i} className="h-8 w-8 shrink-0 text-taupe" /><div className="mt-2 md:mt-0"><p className="text-sm font-medium">{t}</p><p className="mt-0.5 text-xs text-sage/75">{d}</p></div></div>))}
+          <Icon name={i} className="h-8 w-8 shrink-0 text-taupe" /><div className="mt-2 md:mt-0"><p className="text-sm font-medium">{t}</p><p className="mt-0.5 text-xs text-warm">{d}</p></div></div>))}
       </div>
     </section>
 
@@ -66,7 +66,7 @@ export default async function Home() {
     <section id="meilleures-ventes" className="mx-auto mt-24 max-w-7xl scroll-mt-28 px-5">
       <div className="flex items-end justify-between gap-4"><h2 className="h text-3xl md:text-4xl">Meilleures ventes</h2><Link href="/shop" className="shrink-0 border-b border-gold pb-0.5 text-sm font-medium">Tout voir</Link></div>
       {products.length ? <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">{products.map(p => <ProductCard key={p.id} p={p} />)}</div>
-        : <p className="mt-10 text-sage/75">Aucun produit pour le moment.</p>}
+        : <p className="mt-10 text-warm">Aucun produit pour le moment.</p>}
     </section>
 
     {/* Bannière promotionnelle (données réelles : seuil de livraison offerte si défini) */}
@@ -86,7 +86,7 @@ export default async function Home() {
       <div className="mx-auto flex aspect-square w-48 items-center justify-center rounded-full bg-sand/50 md:col-span-2 md:w-full md:max-w-xs"><img src="/brand/lk-monogram.png" alt="" className="w-1/2" /></div>
       <div className="md:col-span-3">
         <h2 className="h text-3xl md:text-4xl">Beauty in every detail</h2>
-        <p className="mt-5 leading-relaxed text-sage/85">COSMÉTIQUE LE K est une boutique en ligne de cosmétiques basée à Oran. Nous vous proposons une sélection soignée de produits originaux et importés, pour une expérience d&rsquo;achat simple, fiable et élégante.</p>
+        <p className="mt-5 leading-relaxed text-warm">COSMÉTIQUE LE K est une boutique en ligne de cosmétiques basée à Oran. Nous vous proposons une sélection soignée de produits originaux et importés, pour une expérience d&rsquo;achat simple, fiable et élégante.</p>
         <Link href="/about" className="mt-6 inline-block border-b border-gold pb-0.5 text-sm font-medium">En savoir plus</Link>
       </div>
     </section>

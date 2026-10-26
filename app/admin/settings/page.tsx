@@ -55,14 +55,14 @@ export default function Settings() {
     <section className="bg-coal border border-ivory/10 p-5 space-y-3">
       <h2 className="h text-lg">Livraison</h2>
       <div className="grid md:grid-cols-2 gap-3">
-        <label className="text-xs text-ivory/50 flex flex-col gap-1">Frais de livraison (DA)<input type="number" min={0} className="input" value={deliveryFee} onChange={e => setDeliveryFee(+e.target.value)} /></label>
-        <label className="text-xs text-ivory/50 flex flex-col gap-1">Livraison gratuite dès (DA, 0 = désactivé)<input type="number" min={0} className="input" value={freeThreshold} onChange={e => setFreeThreshold(+e.target.value)} /></label>
+        <label className="text-xs text-warm flex flex-col gap-1">Frais de livraison (DA)<input type="number" min={0} className="input" value={deliveryFee} onChange={e => setDeliveryFee(+e.target.value)} /></label>
+        <label className="text-xs text-warm flex flex-col gap-1">Livraison gratuite dès (DA, 0 = désactivé)<input type="number" min={0} className="input" value={freeThreshold} onChange={e => setFreeThreshold(+e.target.value)} /></label>
       </div>
     </section>
 
     <section className="bg-coal border border-ivory/10 p-5 space-y-3">
       <h2 className="h text-lg">Commandes</h2>
-      <label className="text-xs text-ivory/50 flex flex-col gap-1 max-w-xs">Seuil de stock faible (unités)<input type="number" min={0} className="input" value={lowStock} onChange={e => setLowStock(+e.target.value)} /></label>
+      <label className="text-xs text-warm flex flex-col gap-1 max-w-xs">Seuil de stock faible (unités)<input type="number" min={0} className="input" value={lowStock} onChange={e => setLowStock(+e.target.value)} /></label>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={autoConfirm} onChange={e => setAutoConfirm(e.target.checked)} /> Confirmer automatiquement les nouvelles commandes</label>
     </section>
 

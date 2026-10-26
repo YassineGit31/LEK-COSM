@@ -96,7 +96,7 @@ export default function DeliveryByWilaya() {
   const num = 'input py-1.5 w-28'
   return (<div className="space-y-5">
     <div className="flex flex-wrap items-center justify-between gap-3"><h1 className="h text-3xl">Livraison</h1>
-      <p className="text-xs text-ivory/50 max-w-md text-right">Réglez, pour chaque wilaya, le frais de la livraison au <b>bureau</b> et à <b>domicile</b>, et activez ou désactivez chaque mode. Un champ vide applique le tarif par défaut ({da(defaultFee)}, modifiable dans Paramètres). Le retrait sur place est toujours gratuit.</p></div>
+      <p className="text-xs text-warm max-w-md text-right">Réglez, pour chaque wilaya, le frais de la livraison au <b>bureau</b> et à <b>domicile</b>, et activez ou désactivez chaque mode. Un champ vide applique le tarif par défaut ({da(defaultFee)}, modifiable dans Paramètres). Le retrait sur place est toujours gratuit.</p></div>
 
     <Card title="Retrait sur place — sans livraison">
       <div className="space-y-3 max-w-2xl">
@@ -109,7 +109,7 @@ export default function DeliveryByWilaya() {
       </div>
     </Card>
 
-    {loading ? <p className="text-sm text-ivory/50">Chargement…</p> : !wilayas.length ? <EmptyState text="Aucune wilaya trouvée. Exécutez migration_wilaya_pricing.sql." /> : (<>
+    {loading ? <p className="text-sm text-warm">Chargement…</p> : !wilayas.length ? <EmptyState text="Aucune wilaya trouvée. Exécutez migration_wilaya_pricing.sql." /> : (<>
       <Card title={`Actions groupées (${selected.size} wilaya${selected.size > 1 ? 's' : ''} sélectionnée${selected.size > 1 ? 's' : ''})`}>
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-2 items-end">
           <input className="input" placeholder="Rechercher une wilaya…" value={q} onChange={e => setQ(e.target.value)} />
@@ -124,10 +124,10 @@ export default function DeliveryByWilaya() {
       </Card>
 
       <Card>
-        <div className="flex items-center justify-between mb-3 text-xs text-ivory/50"><span>{filtered.length} wilaya(s) affichée(s) · {customCount} avec un réglage spécifique</span></div>
+        <div className="flex items-center justify-between mb-3 text-xs text-warm"><span>{filtered.length} wilaya(s) affichée(s) · {customCount} avec un réglage spécifique</span></div>
         <div className="overflow-x-auto border border-ivory/10">
           <table className="w-full text-sm text-left">
-            <thead className="text-xs uppercase tracking-widest text-ivory/50 bg-ink/50"><tr>
+            <thead className="text-xs uppercase tracking-widest text-warm bg-ink/50"><tr>
               <th className="p-2 w-8"></th><th className="p-2">#</th><th className="p-2">Wilaya</th>
               <th className="p-2">Bureau (DA)</th><th className="p-2">Bureau actif</th><th className="p-2">Domicile (DA)</th><th className="p-2">Domicile actif</th><th className="p-2"></th>
             </tr></thead>
@@ -135,13 +135,13 @@ export default function DeliveryByWilaya() {
               const r = get(w.id); const custom = !isDefault(r)
               return (<tr key={w.id} className={`border-t border-ivory/10 ${custom ? 'bg-gold/5' : ''}`}>
                 <td className="p-2"><input type="checkbox" checked={selected.has(w.id)} onChange={() => toggleSelect(w.id)} /></td>
-                <td className="p-2 text-ivory/50">{w.code}</td>
+                <td className="p-2 text-warm">{w.code}</td>
                 <td className="p-2">{w.name}{custom && <span className="ml-2 text-sage text-[10px]">●</span>}</td>
                 <td className="p-2"><input type="number" min={0} className={num} placeholder={String(defaultFee)} value={r.office} onChange={e => patch(w.id, { office: e.target.value })} /></td>
                 <td className="p-2"><label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={r.officeOn} onChange={e => patch(w.id, { officeOn: e.target.checked })} /> Oui</label></td>
                 <td className="p-2"><input type="number" min={0} className={num} placeholder={String(defaultFee)} value={r.home} onChange={e => patch(w.id, { home: e.target.value })} /></td>
                 <td className="p-2"><label className="flex items-center gap-2 text-xs"><input type="checkbox" checked={r.homeOn} onChange={e => patch(w.id, { homeOn: e.target.checked })} /> Oui</label></td>
-                <td className="p-2">{custom && <button type="button" onClick={() => setRows(x => ({ ...x, [w.id]: { ...DEFAULT_ROW } }))} className="text-xs text-ivory/50 underline">Défaut</button>}</td>
+                <td className="p-2">{custom && <button type="button" onClick={() => setRows(x => ({ ...x, [w.id]: { ...DEFAULT_ROW } }))} className="text-xs text-warm underline">Défaut</button>}</td>
               </tr>)
             })}</tbody>
           </table>

@@ -42,17 +42,17 @@ export default function Header({ onMenu }: { onMenu: () => void }) {
         </button>
         {open && (<div className="absolute right-0 mt-3 w-80 bg-coal border border-ivory/15 shadow-xl max-h-96 overflow-y-auto">
           <div className="flex items-center justify-between px-4 py-3 border-b border-ivory/10"><p className="text-xs uppercase tracking-widest">Notifications</p>
-            {notifs.length > 0 && <button className="text-xs underline text-ivory/60" onClick={() => markRead()}>Tout marquer comme lu</button>}</div>
-          {!notifs.length ? <p className="p-4 text-sm text-ivory/50">Aucune notification.</p> : notifs.map(n => (
+            {notifs.length > 0 && <button className="text-xs underline text-warm" onClick={() => markRead()}>Tout marquer comme lu</button>}</div>
+          {!notifs.length ? <p className="p-4 text-sm text-warm">Aucune notification.</p> : notifs.map(n => (
             <button key={n.id} onClick={() => markRead(n.id)} className="w-full text-left px-4 py-3 border-b border-ivory/5 hover:bg-ivory/5 text-sm flex gap-2">
-              <span>{ICON[n.type] || '•'}</span><span><b className="block">{n.title}</b><span className="text-ivory/60">{n.body}</span></span>
+              <span>{ICON[n.type] || '•'}</span><span><b className="block">{n.title}</b><span className="text-warm">{n.body}</span></span>
             </button>))}
         </div>)}
       </div>
       <div className="relative">
         <button className="flex items-center gap-2 text-sm" onClick={() => { setProfile(p => !p); setOpen(false) }}>
           <span className="h-8 w-8 rounded-full bg-gold/20 text-sage flex items-center justify-center text-xs uppercase">{email.slice(0, 2) || 'AD'}</span>
-          <span className="hidden md:block text-ivory/70">{email || 'Admin'}</span>
+          <span className="hidden md:block text-warm">{email || 'Admin'}</span>
         </button>
         {profile && (<div className="absolute right-0 mt-3 w-48 bg-coal border border-ivory/15 shadow-xl text-sm">
           <Link href="/" className="block px-4 py-3 hover:bg-ivory/5 border-b border-ivory/10">Voir le site</Link>

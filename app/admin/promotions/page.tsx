@@ -33,8 +33,8 @@ export default function Promotions() {
       <input required className="input uppercase" placeholder="Code (ex: BIENVENUE10)" value={f.code} onChange={e => setF({ ...f, code: e.target.value })} />
       <select className="input bg-ink" value={f.discount_type} onChange={e => setF({ ...f, discount_type: e.target.value })}><option value="percent">Pourcentage (%)</option><option value="fixed">Montant fixe (DA)</option></select>
       <input required type="number" min={0} className="input" placeholder="Valeur" value={f.value} onChange={e => setF({ ...f, value: e.target.value })} />
-      <label className="text-xs text-ivory/50 flex flex-col gap-1">Début<input type="date" className="input" value={f.starts_at} onChange={e => setF({ ...f, starts_at: e.target.value })} /></label>
-      <label className="text-xs text-ivory/50 flex flex-col gap-1">Fin<input type="date" className="input" value={f.ends_at} onChange={e => setF({ ...f, ends_at: e.target.value })} /></label>
+      <label className="text-xs text-warm flex flex-col gap-1">Début<input type="date" className="input" value={f.starts_at} onChange={e => setF({ ...f, starts_at: e.target.value })} /></label>
+      <label className="text-xs text-warm flex flex-col gap-1">Fin<input type="date" className="input" value={f.ends_at} onChange={e => setF({ ...f, ends_at: e.target.value })} /></label>
       <input type="number" min={0} className="input" placeholder="Commande minimum (DA)" value={f.min_order} onChange={e => setF({ ...f, min_order: e.target.value })} />
       <input type="number" min={0} className="input" placeholder="Utilisations max (optionnel)" value={f.max_uses} onChange={e => setF({ ...f, max_uses: e.target.value })} />
       <button disabled={busy} className="btn btn-solid md:col-span-1">{busy ? 'Création…' : 'Créer le code'}</button>
@@ -42,7 +42,7 @@ export default function Promotions() {
     </form>
     {!rows.length ? <EmptyState text="Aucun code promo." /> : (
       <div className="overflow-x-auto bg-coal border border-ivory/10"><table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr>{['Code', 'Réduction', 'Commande min.', 'Période', 'Utilisations', 'Statut', ''].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr>{['Code', 'Réduction', 'Commande min.', 'Période', 'Utilisations', 'Statut', ''].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
         <tbody>{rows.map(c => (<tr key={c.id} className="border-t border-ivory/10">
           <td className="p-3 text-sage">{c.code}</td>
           <td className="p-3">{c.discount_type === 'percent' ? `${c.value}%` : `${c.value} DA`}</td>

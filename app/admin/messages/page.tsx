@@ -17,11 +17,11 @@ export default function Messages() {
       <div className="space-y-3">{rows.map(m => (
         <div key={m.id} className={`bg-coal border p-5 ${m.is_read ? 'border-ivory/10' : 'border-gold/50'}`}>
           <div className="flex justify-between items-start gap-3"><div><p className="font-medium">{m.name} {!m.is_read && <span className="ml-2 text-[10px] uppercase tracking-widest text-sage">Nouveau</span>}</p>
-            <p className="text-xs text-ivory/50">{m.phone} {m.email && `· ${m.email}`} · {new Date(m.created_at).toLocaleString('fr-FR')}</p></div>
+            <p className="text-xs text-warm">{m.phone} {m.email && `· ${m.email}`} · {new Date(m.created_at).toLocaleString('fr-FR')}</p></div>
             <div className="text-xs space-x-2 shrink-0">{m.phone && <a className="underline text-sage" target="_blank" href={waLink(m.phone)}>WhatsApp</a>}{!m.is_read && <button onClick={() => markRead(m.id)} className="underline">Marquer lu</button>}<button onClick={() => del(m.id)} className="underline text-red-700">Suppr.</button></div>
           </div>
           {m.subject && <p className="mt-2 text-sm text-sage">{m.subject}</p>}
-          <p className="mt-2 text-sm text-ivory/80 whitespace-pre-wrap">{m.body}</p>
+          <p className="mt-2 text-sm text-warm whitespace-pre-wrap">{m.body}</p>
         </div>
       ))}</div>
     )}

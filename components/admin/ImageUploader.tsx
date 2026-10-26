@@ -58,12 +58,12 @@ export default function ImageUploader({ images, onChange, folder }: { images: st
         </div>
       </div>))}
       <button type="button" onClick={() => inputRef.current?.click()} disabled={busy}
-        className="aspect-square border border-dashed border-ivory/25 flex flex-col items-center justify-center text-xs text-ivory/50 hover:border-gold hover:text-sage transition disabled:opacity-40">
+        className="aspect-square border border-dashed border-ivory/25 flex flex-col items-center justify-center text-xs text-warm hover:border-gold hover:text-sage transition disabled:opacity-40">
         <span className="text-2xl leading-none mb-1">{busy ? '…' : '+'}</span>{busy ? 'Envoi…' : 'Ajouter'}
       </button>
     </div>
     <input ref={inputRef} type="file" accept="image/*" multiple className="hidden" onChange={e => handleFiles(e.target.files)} />
     {err && <p className="text-red-700 text-xs">{err}</p>}
-    <p className="text-[11px] text-ivory/40">La première image est utilisée comme visuel principal. Glissez les flèches pour réordonner.</p>
+    <p className="text-[11px] text-warm">La première image est utilisée comme visuel principal. Glissez les flèches pour réordonner.</p>
   </div>)
 }

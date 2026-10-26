@@ -67,26 +67,26 @@ export default function Stock() {
       <div className="grid md:grid-cols-2 gap-3">
         <button type="button" onClick={() => setMode(true)} aria-pressed={stockOn} className={`text-left border p-4 transition ${stockOn ? 'border-sage ring-1 ring-sage bg-ink' : 'border-ivory/20 hover:border-sage/60'}`}>
           <span className="block text-sm font-medium">ON — Suivi automatique du stock</span>
-          <span className="block text-xs text-ivory/60 mt-1">Le stock est vérifié à chaque commande, décrémenté automatiquement, et restitué si la commande est annulée ou supprimée.</span></button>
+          <span className="block text-xs text-warm mt-1">Le stock est vérifié à chaque commande, décrémenté automatiquement, et restitué si la commande est annulée ou supprimée.</span></button>
         <button type="button" onClick={() => setMode(false)} aria-pressed={!stockOn} className={`text-left border p-4 transition ${!stockOn ? 'border-sage ring-1 ring-sage bg-ink' : 'border-ivory/20 hover:border-sage/60'}`}>
           <span className="block text-sm font-medium">OFF — Disponibilité manuelle</span>
-          <span className="block text-xs text-ivory/60 mt-1">Les quantités ne sont plus utilisées. Vous choisissez pour chaque produit : Disponible ou Indisponible. Aucune commande ne modifie le stock.</span></button>
+          <span className="block text-xs text-warm mt-1">Les quantités ne sont plus utilisées. Vous choisissez pour chaque produit : Disponible ou Indisponible. Aucune commande ne modifie le stock.</span></button>
       </div>
-      <p className="text-xs text-ivory/60">Mode actuel : <b className="font-medium">{stockOn ? 'ON (suivi automatique)' : 'OFF (disponibilité manuelle)'}</b>{modeMsg && <span className="ml-3 text-sage">{modeMsg}</span>}</p>
+      <p className="text-xs text-warm">Mode actuel : <b className="font-medium">{stockOn ? 'ON (suivi automatique)' : 'OFF (disponibilité manuelle)'}</b>{modeMsg && <span className="ml-3 text-sage">{modeMsg}</span>}</p>
     </section>
-    <p className="text-xs text-ivory/50 max-w-2xl">Le flacon plein et les portions 10ML d'un même parfum partagent un seul stock physique (en ml). Modifiez ce stock total ci-dessous : les deux compteurs affichés (flacons / portions) se recalculent automatiquement et restent toujours cohérents entre eux.</p>
+    <p className="text-xs text-warm max-w-2xl">Le flacon plein et les portions 10ML d'un même parfum partagent un seul stock physique (en ml). Modifiez ce stock total ci-dessous : les deux compteurs affichés (flacons / portions) se recalculent automatiquement et restent toujours cohérents entre eux.</p>
     <div className="grid md:grid-cols-3 gap-2">
       <input className="input md:col-span-2" placeholder="Rechercher un produit…" value={q} onChange={e => setQ(e.target.value)} />
       <select className="input bg-ink" value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
         <option value="">Tous statuts</option>{stockOn ? <><option value="IN_STOCK">En stock</option><option value="LOW_STOCK">Stock faible</option><option value="OUT_OF_STOCK">Rupture</option></> : <><option value="AVAILABLE">Disponible</option><option value="UNAVAILABLE">Indisponible</option></>}
       </select>
     </div>
-    {loading ? <p className="text-sm text-ivory/50">Chargement…</p> : !filtered.length ? <EmptyState text="Aucun résultat." /> : (
+    {loading ? <p className="text-sm text-warm">Chargement…</p> : !filtered.length ? <EmptyState text="Aucun résultat." /> : (
       <div className="overflow-x-auto bg-coal border border-ivory/10"><table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr>{['Produit', 'SKU', 'Stock total (ml)', 'Flacons pleins', 'Portions 10ML', stockOn ? 'Statut' : 'Disponibilité', 'Mettre à jour'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr>{['Produit', 'SKU', 'Stock total (ml)', 'Flacons pleins', 'Portions 10ML', stockOn ? 'Statut' : 'Disponibilité', 'Mettre à jour'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
         <tbody>{filtered.map(p => { const s = statusOf(p); return (<tr key={p.id} className="border-t border-ivory/10">
           <td className="p-3"><span className="text-sage text-xs uppercase tracking-widest block">{p.brand}</span>{p.name}</td>
-          <td className="p-3 text-ivory/60">{p.sku}</td>
+          <td className="p-3 text-warm">{p.sku}</td>
           <td className="p-3">{p.stock_ml} ml</td>
           <td className="p-3">{p.full_enabled ? `${p.full_stock} × ${p.full_size}` : '—'}</td>
           <td className="p-3">{p.sample_10ml ? `${p.stock_10ml} × 10ML` : '—'}</td>

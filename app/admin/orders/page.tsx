@@ -43,7 +43,7 @@ export default function AdminOrders() {
   const wilayas = [...new Set(orders.map(o => o.wilaya))].sort()
 
   return (<div className="space-y-5">
-    <div className="flex items-center justify-between"><h1 className="h text-3xl">Commandes</h1><p className="text-sm text-ivory/50">{rows.length} / {orders.length} commandes</p></div>
+    <div className="flex items-center justify-between"><h1 className="h text-3xl">Commandes</h1><p className="text-sm text-warm">{rows.length} / {orders.length} commandes</p></div>
 
     <div className="grid md:grid-cols-7 gap-2">
       <input className="input md:col-span-2" placeholder="N° commande, nom, téléphone" value={q} onChange={e => setQ(e.target.value)} />
@@ -54,14 +54,14 @@ export default function AdminOrders() {
       <div className="flex gap-2"><input type="date" className="input" value={from} onChange={e => setFrom(e.target.value)} /><input type="date" className="input" value={to} onChange={e => setTo(e.target.value)} /></div>
     </div>
 
-    {loading ? <p className="text-sm text-ivory/50">Chargement…</p> : !rows.length ? <EmptyState text="Aucune commande ne correspond à ces filtres." /> : (
+    {loading ? <p className="text-sm text-warm">Chargement…</p> : !rows.length ? <EmptyState text="Aucune commande ne correspond à ces filtres." /> : (
       <div className="overflow-x-auto bg-coal border border-ivory/10"><table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr>{['Commande', 'Client', 'Livraison', 'Articles', 'Montants', 'Paiement', 'Statut', 'Actions'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr>{['Commande', 'Client', 'Livraison', 'Articles', 'Montants', 'Paiement', 'Statut', 'Actions'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
         <tbody>{rows.map(o => (<tr key={o.id} className="border-t border-ivory/10 align-top hover:bg-ivory/5">
-          <td className="p-3"><Link href={`/admin/orders/${o.id}`} className="underline decoration-ivory/30 hover:decoration-gold">{o.order_number}</Link><br /><span className="text-ivory/40 text-xs">{new Date(o.created_at).toLocaleString('fr-FR')}</span></td>
+          <td className="p-3"><Link href={`/admin/orders/${o.id}`} className="underline decoration-ivory/30 hover:decoration-gold">{o.order_number}</Link><br /><span className="text-warm text-xs">{new Date(o.created_at).toLocaleString('fr-FR')}</span></td>
           <td className="p-3">{o.customers?.name}<br /><a className="text-sage" href={`tel:${o.customers?.phone}`}>{o.customers?.phone}</a></td>
-          <td className="p-3"><MethodBadge method={o.delivery_method} /><br />{o.wilaya}{o.delivery_method === 'pickup' ? '' : <>, {o.commune}</>}{o.delivery_method === 'home' && <><br /><span className="text-ivory/50 text-xs">{o.address}</span></>}{o.delivery_method === 'pickup' && o.pickup_info && <><br /><span className="text-ivory/50 text-xs whitespace-pre-line">{o.pickup_info}</span></>}</td>
-          <td className="p-3">{o.order_items.map((i: any) => <p key={i.id}>{i.product_name}<br /><span className="text-ivory/50 text-xs">{fmtLabel(i.format, i.size)} × {i.quantity}</span></p>)}</td>
+          <td className="p-3"><MethodBadge method={o.delivery_method} /><br />{o.wilaya}{o.delivery_method === 'pickup' ? '' : <>, {o.commune}</>}{o.delivery_method === 'home' && <><br /><span className="text-warm text-xs">{o.address}</span></>}{o.delivery_method === 'pickup' && o.pickup_info && <><br /><span className="text-warm text-xs whitespace-pre-line">{o.pickup_info}</span></>}</td>
+          <td className="p-3">{o.order_items.map((i: any) => <p key={i.id}>{i.product_name}<br /><span className="text-warm text-xs">{fmtLabel(i.format, i.size)} × {i.quantity}</span></p>)}</td>
           <td className="p-3 text-xs whitespace-nowrap">Sous-total : {da(o.subtotal)}{o.discount > 0 && <><br />Remise : −{da(o.discount)}</>}<br />Livraison : {o.delivery_method === 'pickup' ? 'Gratuit' : o.delivery_fee ? da(o.delivery_fee) : 'Offerte'}<br /><b className="text-sm font-medium">Total : {da(o.total)}</b></td>
           <td className="p-3 text-xs">{o.payment_method === 'cod' ? (o.delivery_method === 'pickup' ? 'Au retrait' : 'À la livraison') : o.payment_method}{o.coupon_code && <><br /><span className="text-sage">{o.coupon_code}</span></>}</td>
           <td className="p-3"><StatusBadge status={o.status} /></td>

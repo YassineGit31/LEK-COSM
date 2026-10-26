@@ -15,10 +15,10 @@ export default function ShopClient({ products, title, active }: { products: Prod
     const s: Record<string, (a: Product, b: Product) => number> = { new: (a, b) => +new Date(b.created_at) - +new Date(a.created_at), asc: (a, b) => minPrice(a) - minPrice(b), desc: (a, b) => minPrice(b) - minPrice(a), best: (a, b) => +b.is_best_seller - +a.is_best_seller, az: (a, b) => a.name.localeCompare(b.name) }
     return [...l].sort(s[sort])
   }, [products, q, sort, max, inStock, stockManagement])
-  const chip = (on: boolean) => `whitespace-nowrap rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${on ? 'border-sage bg-sage text-cream' : 'border-sage/25 bg-white hover:border-sage'}`
+  const chip = (on: boolean) => `whitespace-nowrap rounded-full border px-4 py-2 text-[13px] font-medium transition-colors ${on ? 'border-sage bg-sage text-cream' : 'border-sage/25 bg-coal hover:border-sage'}`
   return (<div className="mx-auto max-w-7xl px-5 py-10 md:py-14">
     <h1 className="h text-4xl md:text-5xl">{title}</h1>
-    <p id="best" className="mt-2 text-sm text-sage/75" aria-live="polite">{list.length} {list.length > 1 ? 'produits' : 'produit'}</p>
+    <p id="best" className="mt-2 text-sm text-warm" aria-live="polite">{list.length} {list.length > 1 ? 'produits' : 'produit'}</p>
     <nav aria-label="Catégories" className="-mx-5 mt-7 flex gap-2 overflow-x-auto px-5 pb-1">
       <Link href="/shop" className={chip(!active && title === 'Toute la boutique')}>Tout</Link>
       {CATEGORIES.map(c => <Link key={c.slug} href={`/shop/${c.slug}`} className={chip(active === c.slug)}>{c.name}</Link>)}
@@ -30,6 +30,6 @@ export default function ShopClient({ products, title, active }: { products: Prod
       <label className="flex items-center gap-3 text-sm"><input type="checkbox" className="h-4 w-4 accent-sage" checked={inStock} onChange={e => setInStock(e.target.checked)} />{stockManagement ? 'En stock uniquement' : 'Disponibles uniquement'}</label>
     </div>
     {list.length ? <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">{list.map(p => <ProductCard key={p.id} p={p} />)}</div>
-      : <div className="py-24 text-center"><p className="h text-2xl">Aucun produit ne correspond.</p><p className="mt-2 text-sm text-sage/75">Modifiez votre recherche ou vos filtres.</p><Link href="/shop" className="btn mt-6">Voir toute la boutique</Link></div>}
+      : <div className="py-24 text-center"><p className="h text-2xl">Aucun produit ne correspond.</p><p className="mt-2 text-sm text-warm">Modifiez votre recherche ou vos filtres.</p><Link href="/shop" className="btn mt-6">Voir toute la boutique</Link></div>}
   </div>)
 }

@@ -42,16 +42,16 @@ export default function AdminProducts() {
       <select className="input bg-ink" value={gender} onChange={e => setGender(e.target.value)}><option value="">Tous genres</option><option value="homme">Homme</option><option value="femme">Femme</option><option value="unisex">Unisex</option></select>
       <select className="input bg-ink" value={active} onChange={e => setActive(e.target.value)}><option value="">Tous statuts</option><option value="1">Actif</option><option value="0">Inactif</option></select>
     </div>
-    {loading ? <p className="text-sm text-ivory/50">Chargement…</p> : !rows.length ? <EmptyState text="Aucun produit." /> : (
+    {loading ? <p className="text-sm text-warm">Chargement…</p> : !rows.length ? <EmptyState text="Aucun produit." /> : (
       <div className="overflow-x-auto bg-coal border border-ivory/10"><table className="w-full text-sm text-left">
-        <thead className="text-xs uppercase tracking-widest text-ivory/50"><tr>{['Produit', 'Genre', 'Full Size', '10ML', 'Disponibilité', 'Statut', 'Actions'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
+        <thead className="text-xs uppercase tracking-widest text-warm"><tr>{['Produit', 'Genre', 'Full Size', '10ML', 'Disponibilité', 'Statut', 'Actions'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
         <tbody>{rows.map(p => (<tr key={p.id} className="border-t border-ivory/10 hover:bg-ivory/5">
           <td className="p-3 flex items-center gap-3"><img src={p.images?.[0] || '/brand/lk-monogram.png'} className="h-12 w-10 object-cover bg-ink" alt="" />
-            <span><span className="block text-sage text-xs uppercase tracking-widest">{p.brand}</span>{p.name}<span className="block text-ivory/40 text-xs">{p.sku}</span></span></td>
+            <span><span className="block text-sage text-xs uppercase tracking-widest">{p.brand}</span>{p.name}<span className="block text-warm text-xs">{p.sku}</span></span></td>
           <td className="p-3 capitalize">{p.gender}</td>
-          <td className="p-3">{p.full_enabled ? <>{da(p.full_price)}<br /><span className={`text-xs ${p.full_stock <= 5 ? 'text-amber-700' : 'text-ivory/50'}`}>Stock: {p.full_stock}</span></> : <span className="text-ivory/30">—</span>}</td>
-          <td className="p-3">{p.sample_10ml ? <>{da(p.price_10ml || 0)}<br /><span className={`text-xs ${p.stock_10ml <= 5 ? 'text-amber-700' : 'text-ivory/50'}`}>Stock: {p.stock_10ml}</span></> : <span className="text-ivory/30">—</span>}</td>
-          <td className="p-3"><select aria-label={`Disponibilité de ${p.name}`} className={`input !py-1.5 w-36 ${stockOn ? 'opacity-60' : ''}`} value={p.is_available === false ? '0' : '1'} onChange={e => setAvailable(p, e.target.value === '1')}><option value="1">Disponible</option><option value="0">Indisponible</option></select>{stockOn && <span className="block text-[10px] text-ivory/50 mt-1">Utilisée si le stock est désactivé</span>}</td>
+          <td className="p-3">{p.full_enabled ? <>{da(p.full_price)}<br /><span className={`text-xs ${p.full_stock <= 5 ? 'text-amber-700' : 'text-warm'}`}>Stock: {p.full_stock}</span></> : <span className="text-warm">—</span>}</td>
+          <td className="p-3">{p.sample_10ml ? <>{da(p.price_10ml || 0)}<br /><span className={`text-xs ${p.stock_10ml <= 5 ? 'text-amber-700' : 'text-warm'}`}>Stock: {p.stock_10ml}</span></> : <span className="text-warm">—</span>}</td>
+          <td className="p-3"><select aria-label={`Disponibilité de ${p.name}`} className={`input !py-1.5 w-36 ${stockOn ? 'opacity-60' : ''}`} value={p.is_available === false ? '0' : '1'} onChange={e => setAvailable(p, e.target.value === '1')}><option value="1">Disponible</option><option value="0">Indisponible</option></select>{stockOn && <span className="block text-[10px] text-warm mt-1">Utilisée si le stock est désactivé</span>}</td>
           <td className="p-3"><button onClick={() => toggleActive(p)} className={`px-2 py-1 text-xs ${p.is_active ? 'bg-emerald-600' : 'bg-ivory/20'}`}>{p.is_active ? 'Actif' : 'Inactif'}</button></td>
           <td className="p-3 space-x-1 space-y-1">
             <Link href={`/admin/products/${p.id}`} className="border border-ivory/25 px-2 py-1 text-xs inline-block hover:border-gold">Modifier</Link>
