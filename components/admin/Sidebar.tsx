@@ -8,6 +8,7 @@ const nav = [
   ['/admin/categories', 'Catégories', '▦'],
   ['/admin/delivery', 'Livraison & retrait', '⌗'],
   ['/admin/customers', 'Clients', '◑'],
+  ['/admin/visitors', 'Visiteurs', '◔'],
   ['/admin/stock', 'Stock', '◫'],
   ['/admin/promotions', 'Promotions', '◎'],
   ['/admin/messages', 'Messages', '✉'],

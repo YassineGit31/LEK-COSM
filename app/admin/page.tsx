@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [orders, setOrders] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [customerCount, setCustomerCount] = useState(0)
+  const [visitsToday, setVisitsToday] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Dashboard() {
         c.from('products').select('id,name,brand,full_stock,stock_10ml,is_active,sku'),
         c.from('customers').select('id', { count: 'exact', head: true }),
       ])
+      const v = await c.rpc('visits_daily', { p_days: 1 }); if (!v.error && v.data?.[0]) setVisitsToday(Number(v.data[0].visitors))
       setOrders(o.data || []); setProducts(p.data || []); setCustomerCount((cu as any).count || 0)
       setLoading(false)
     })()
@@ -61,7 +63,8 @@ export default function Dashboard() {
       <StatCard label="CA ce mois" value={da(revenue.month)} />
       <StatCard label="CA total" value={da(revenue.total)} />
     </div>
-    <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+    <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
+      <Link href="/admin/visitors"><StatCard label="Visiteurs aujourd'hui" value={visitsToday ?? '—'} sub="voir le détail" /></Link>
       <StatCard label="Commandes" value={orders.length} />
       <StatCard label="En attente" value={pending} sub="à confirmer" />
       <StatCard label="Produits vendus" value={unitsSold} />

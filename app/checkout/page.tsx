@@ -8,11 +8,12 @@ import { useWilaya } from '@/lib/wilaya'
 import { useStoreSettings } from '@/lib/store-settings'
 import { METHODS, METHOD_LABEL, type DeliveryMethod } from '@/lib/delivery'
 import { da, fmtLabel } from '@/lib/format'
+import { waNumber, waOrderText, waUrl } from '@/lib/whatsapp'
 
 export default function Checkout() {
   const { items, subtotal, clear } = useCart(); const router = useRouter()
   const { wilaya, setWilaya, wilayas, officeFee, homeFee, officeOk, homeOk, loading: feeLoading } = useWilaya()
-  const { pickup, freeThreshold: free } = useStoreSettings()
+  const { pickup, freeThreshold: free, whatsapp } = useStoreSettings()
   const [f, setF] = useState({ name:'', phone:'', email:'', wilaya, commune:'', address:'', notes:'', coupon:'' })
   const [method, setMethod] = useState<DeliveryMethod | ''>('')
   const [discount, setDiscount] = useState(0)
@@ -52,11 +53,15 @@ export default function Checkout() {
     if (method !== 'pickup' && !f.commune.trim()) return setErr('Veuillez indiquer votre commune.')
     if (method === 'home' && !f.address.trim()) return setErr('Veuillez indiquer votre adresse complète.')
     setBusy(true)
+    // On ouvre l'onglet WhatsApp tout de suite (pendant le clic) pour éviter le blocage des pop-ups ; il sera rempli après l'enregistrement.
+    const waTo = waNumber(whatsapp)
+    const waWin = waTo ? window.open('', '_blank') : null
+    if (waWin) { try { waWin.document.write('<p style="font-family:sans-serif;padding:24px;color:#722F37">Envoi de votre commande…</p>') } catch {} }
     const { data, error } = await sb().rpc('place_order', { p_customer:{ name:f.name, phone:f.phone.replace(/\s/g, ''), email:f.email },
       p_address:{ wilaya:f.wilaya, commune: method === 'pickup' ? '' : f.commune, address: method === 'pickup' ? '' : f.address, notes:f.notes, delivery_method: method },
       p_items:items.map(i => ({ product_id:i.productId, format:i.format, quantity:i.qty })), p_coupon:f.coupon || null })
     if (error) {
-      setBusy(false)
+      setBusy(false); try { waWin?.close() } catch {}
       const m = error.message
       if (m.includes('OUT_OF_STOCK')) return setErr("Un article n'est plus disponible en quantité suffisante.")
       if (m.includes('PRODUCT_UNAVAILABLE')) { const n = m.split('PRODUCT_UNAVAILABLE:')[1]?.split('\n')[0]?.trim(); return setErr(n ? `« ${n} » est actuellement indisponible. Retirez-le de votre panier pour continuer.` : "Un article de votre panier n'est plus disponible.") }
@@ -75,7 +80,15 @@ export default function Checkout() {
     const tr = await sb().rpc('track_order', { p_number: o.order_number, p_phone: f.phone.replace(/\s/g, '') })
     if (!tr.error && tr.data) { finalTotal = (tr.data as any).total; finalFee = (tr.data as any).delivery_fee }
     setBusy(false)
-    sessionStorage.setItem('wp_last_order', JSON.stringify({ number:o.order_number, phone:f.phone, items, subtotal, delivery: finalFee, discount: Math.max(0, subtotal + finalFee - finalTotal), total: finalTotal,
+    // La commande est déjà enregistrée dans la base : WhatsApp n'est qu'un envoi en plus vers le numéro de la boutique.
+    let whatsappUrl = ''
+    if (waTo) {
+      whatsappUrl = waUrl(waTo, waOrderText({ number: o.order_number, name: f.name, phone: f.phone, wilaya: f.wilaya, commune: f.commune, address: f.address, notes: f.notes, method,
+        pickup: method === 'pickup' ? pickup : null, items: items.map(i => ({ name: i.name, format: i.format, size: i.size, qty: i.qty, price: i.price })),
+        subtotal, discount: Math.max(0, subtotal + finalFee - finalTotal), delivery: finalFee, total: finalTotal }))
+      if (waWin) { try { waWin.location.href = whatsappUrl } catch {} }
+    }
+    sessionStorage.setItem('wp_last_order', JSON.stringify({ number:o.order_number, phone:f.phone, whatsappUrl, items, subtotal, delivery: finalFee, discount: Math.max(0, subtotal + finalFee - finalTotal), total: finalTotal,
       method, pickup: method === 'pickup' ? pickup : null, name:f.name, wilaya:f.wilaya, commune:f.commune, address:f.address }))
     clear(); router.push('/order-success')
   }

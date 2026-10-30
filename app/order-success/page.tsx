@@ -23,5 +23,8 @@ export default function Success() {
         : o.method === 'office'
           ? <p className="text-warm">Bureau de la société de livraison — {o.commune}, {o.wilaya}. Paiement à la réception.</p>
           : <p className="text-warm">Livraison : {o.name}, {o.address}, {o.commune}, {o.wilaya}. Paiement à la livraison.</p>}</div>
+    {o.whatsappUrl && <div className="mt-8 rounded-2xl border border-gold bg-sand p-5 text-center text-sm">
+      <p className="text-warm">Pour accélérer le traitement, envoyez aussi votre commande à la boutique sur WhatsApp. Si WhatsApp ne s&rsquo;est pas ouvert, cliquez ci-dessous, puis appuyez sur « Envoyer ».</p>
+      <a href={o.whatsappUrl} target="_blank" rel="noreferrer" className="btn btn-solid mt-4">Envoyer ma commande sur WhatsApp</a></div>}
     <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/track-order" className="btn btn-solid">Suivre ma commande</Link><Link href="/shop" className="btn">Continuer vos achats</Link></div></div>)
 }

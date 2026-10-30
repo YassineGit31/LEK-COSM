@@ -45,7 +45,7 @@ export default function Settings() {
       <input className="input" placeholder="Nom de la boutique" value={store.name} onChange={e => setStore({ ...store, name: e.target.value })} />
       <div className="grid md:grid-cols-2 gap-3">
         <input className="input" placeholder="Téléphone" value={store.phone} onChange={e => setStore({ ...store, phone: e.target.value })} />
-        <input className="input" placeholder="WhatsApp" value={store.whatsapp} onChange={e => setStore({ ...store, whatsapp: e.target.value })} />
+        <input className="input" placeholder="WhatsApp de la boutique (reçoit les commandes) ex : 0550123456" value={store.whatsapp} onChange={e => setStore({ ...store, whatsapp: e.target.value })} />
         <input className="input" placeholder="Instagram" value={store.instagram} onChange={e => setStore({ ...store, instagram: e.target.value })} />
         <input className="input" placeholder="TikTok" value={store.tiktok} onChange={e => setStore({ ...store, tiktok: e.target.value })} />
         <input className="input" placeholder="Facebook" value={store.facebook} onChange={e => setStore({ ...store, facebook: e.target.value })} />
